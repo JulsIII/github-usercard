@@ -107,3 +107,24 @@ function gitCardMaker(gData) {
     luishrd
     bigknell
 */
+
+axios
+.get('https://api.github.com/users/JulsIII')
+.then((res) => {  //whatevr the get gets us is avilble to use here! setups callback for next 'res' ex. 
+  console.log(res.data); //to check what 'res' looks like. shoudld be an obj, data contains and obj, anotrher propertty called 'message' cosaintg the end array. Array means end.
+  const resGData = res.data.message; //end array we found from above being declared
+     // loop over the array of images 
+    resGData.forEach(gData => { //takes callback that had array images
+      // create dog card
+    const newGitUserCard = gitCardMaker(gData) //for each image use dogCardmaker, making cards. Dog Name can be changed!
+      // console log done
+    console.log('done') //confirm done making cards
+      // append to entry point
+    gitCard.appendChild(newGitUserCard); //append the entry point area of website, and add the cards
+  });
+})
+.catch((err) => {
+  debugger;
+});
+
+//followersArray
