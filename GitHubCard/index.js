@@ -33,7 +33,13 @@ console.log(gData);
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  'tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell'
+];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -54,7 +60,7 @@ const followersArray = [];
       </div>
     </div>
 */
-function gitCardMaker(dataObj) {
+function gitCardMaker(gData) {
   // instantiating the elements
   const gitCard = document.createElement('div');
   const gitImage = document.createElement('img');
@@ -68,14 +74,14 @@ function gitCardMaker(dataObj) {
   
   // setting class names, attributes and text
   gitCard.classList.add('card') ;
-  gitImage.src = dataObj.avatar_url;
+  gitImage.src = gData.avatar_url;
   gitCardInfo.classList.add('card-info') ;
-  gitUserName.textContent = `User Name: ${dataObj.login}`;
-  gitUserLoction.textContent = `Location: ${dataObj.location}`;
-  gitProfileLink.textContent = `Profile: ${dataObj.html_url}`;
-  gitUserFollowers.textContent = `Followers: ${dataObj.followers}`;
-  gitUserFollowing.textContent = `Following: ${dataObj.following}`;
-  gitUserBio.textContent = `Bio:: ${dataObj.bio}`;
+  gitUserName.textContent = `User Name: ${gData.login}`;
+  gitUserLoction.textContent = `Location: ${gData.location}`;
+  gitProfileLink.textContent = `Profile: ${gData.html_url}`;
+  gitUserFollowers.textContent = `Followers: ${gData.followers}`;
+  gitUserFollowing.textContent = `Following: ${gData.following}`;
+  gitUserBio.textContent = `Bio:: ${gData.bio}`;
   // creating the hierarchy
   gitCard.appendChild(gitImage);
   gitCard.appendChild(gitCardInfo);
