@@ -4,9 +4,33 @@
     https://api.github.com/users/<your name>
 */
 import axios from "axios";
-console.log(axios);
-const gData = axios.get('https://api.github.com/users/JulsIII');
-console.log(gData);
+//console.log(axios);
+axios
+.get('https://api.github.com/users/JulsIII')
+
+
+
+  .then((res) => {
+  
+  console.log('data', res.data);
+
+  const ftnResult = gitCardMaker(res.data);
+
+  console.log('ftn result', ftnResult);
+  // console.log('b4 git card', gitCard);
+  gitCards.appendChild(ftnResult);
+  // console.log('afr gitcard', gitCard);
+
+   })
+
+    .catch((err) => {
+    console.log('err1 log', err)
+
+});
+
+//console.log(gData);
+
+
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -32,7 +56,14 @@ console.log(gData);
     Using that array, iterate over it, requesting data for each user, creating a new card for each
     user, and adding that card to the DOM.
 */
-
+/*
+  List of LS Instructors Github username's:
+    tetondan
+    dustinmyers
+    justsml
+    luishrd
+    bigknell
+*/
 const followersArray = [
   'tetondan',
   'dustinmyers',
@@ -59,38 +90,52 @@ const followersArray = [
         <p>Bio: {users bio}</p>
       </div>
     </div>
-*/
-function gitCardMaker(gData) {
+*/  
+const gitCards = document.querySelector('.cards');
+
+function gitCardMaker(data) {
   // instantiating the elements
   const gitCard = document.createElement('div');
   const gitImage = document.createElement('img');
-  const gitCardInfo = document.createElement('h3');
+  const gitCardInfo = document.createElement('div');
+  const gitName = document.createElement('h3');
   const gitUserName = document.createElement('p');
   const gitUserLoction = document.createElement('p');
   const gitProfileLink = document.createElement('p');
+  const gitURLLink = document.createElement('a');
   const gitUserFollowers = document.createElement('p');
   const gitUserFollowing = document.createElement('p');
   const gitUserBio = document.createElement('p');
   
   // setting class names, attributes and text
   gitCard.classList.add('card') ;
-  gitImage.src = gData.avatar_url;
-  gitCardInfo.classList.add('card-info') ;
-  gitUserName.textContent = `User Name: ${gData.login}`;
-  gitUserLoction.textContent = `Location: ${gData.location}`;
-  gitProfileLink.textContent = `Profile: ${gData.html_url}`;
-  gitUserFollowers.textContent = `Followers: ${gData.followers}`;
-  gitUserFollowing.textContent = `Following: ${gData.following}`;
-  gitUserBio.textContent = `Bio:: ${gData.bio}`;
+  gitImage.src = data.avatar_url;
+  gitCardInfo.classList.add('card-info');
+  gitName.classList.add('name');
+  gitName.textContent = `Name: ${data.name}`;
+  gitUserName.textContent = `User Name: ${data.login}`;
+  gitUserName.classList.add('username');
+  gitUserLoction.textContent = `Location: ${data.location}`;
+  gitProfileLink.textContent = `Profile: ${data.html_url}`;
+  gitURLLink.textContent = data.url;
+  gitURLLink.href = data.url;
+  gitUserFollowers.textContent = `Followers: ${data.followers}`;
+  gitUserFollowing.textContent = `Following: ${data.following}`;
+  gitUserBio.textContent = `Bio: ${data.bio}`;
+
   // creating the hierarchy
   gitCard.appendChild(gitImage);
   gitCard.appendChild(gitCardInfo);
-  gitCard.appendChild(gitUserName);
-  gitCard.appendChild(gitUserLoction);
-  gitCard.appendChild(gitProfileLink);
-  gitCard.appendChild(gitUserFollowers);
-  gitCard.appendChild(gitUserFollowing);
-  gitCard.appendChild(gitUserBio);
+  gitCardInfo.appendChild(gitName);
+  gitCardInfo.appendChild(gitUserName);
+  gitCardInfo.appendChild(gitUserLoction);
+  gitCardInfo.appendChild(gitProfileLink);
+  gitCardInfo.appendChild(gitUserFollowers);
+  gitCardInfo.appendChild(gitUserFollowing);
+  gitCardInfo.appendChild(gitUserBio);
+  gitProfileLink.appendChild(gitURLLink);
+
+  //console.log('asdf', gitImage); 
   // adding some interactivity
   // gitCard.addEventListener('click', () => {
   //   gitCard.classList.toggle('selected')
@@ -99,32 +144,46 @@ function gitCardMaker(gData) {
   // never forget to return!
   return gitCard;
 }
-/*
-  List of LS Instructors Github username's:
-    tetondan
-    dustinmyers
-    justsml
-    luishrd
-    bigknell
-*/
 
+// axios
+// .get('https://api.github.com/users/JulsIII')
+//   .then((res) => {  //whatevr the get gets us is avilble to use here! setups callback for next 'res' ex. 
+//   console.log(res.data); //to check what 'res' looks like. shoudld be an obj, data contains and obj, anotrher propertty called 'message' cosaintg the end array. Array means end.
+//   const resGData = res.data; //end array we found from above being declared
+//      // loop over the array
+//      followersArray.forEach(follower => { //takes callback that had array items
+//       // create card
+//     const newGitUserCard = gitCardMaker(follower) //for each image use dogCardmaker, making cards. Dog Name can be changed!
+//       // console log done
+//     console.log('done') //confirm done making cards
+//       // append
+//     gitCard.appendChild(newGitUserCard); //append the entry point area of website, and add the cards
+//   });
+// })
+// .catch((err) => {
+//   debugger;
+// });
+
+ followersArray.forEach(follower => {
+   
 axios
-.get('https://api.github.com/users/JulsIII')
-.then((res) => {  //whatevr the get gets us is avilble to use here! setups callback for next 'res' ex. 
+.get(`https://api.github.com/users/${follower}`)
+  .then((res) => {  //whatevr the get gets us is avilble to use here! setups callback for next 'res' ex. 
   console.log(res.data); //to check what 'res' looks like. shoudld be an obj, data contains and obj, anotrher propertty called 'message' cosaintg the end array. Array means end.
-  const resGData = res.data.message; //end array we found from above being declared
-     // loop over the array of images 
-    resGData.forEach(gData => { //takes callback that had array images
-      // create dog card
-    const newGitUserCard = gitCardMaker(gData) //for each image use dogCardmaker, making cards. Dog Name can be changed!
+  const resGData = res.data; //end array we found from above being declared
+     // loop over the array
+     //takes callback that had array items
+      // create card
+    const newGitUserCard = gitCardMaker(resGData) //for each image use dogCardmaker, making cards. Dog Name can be changed!
       // console log done
     console.log('done') //confirm done making cards
-      // append to entry point
-    gitCard.appendChild(newGitUserCard); //append the entry point area of website, and add the cards
+      // append
+    gitCards.appendChild(newGitUserCard); //append the entry point area of website, and add the cards
+  
+  })
+  .catch((err) => {
+  //debugger;
   });
-})
-.catch((err) => {
-  debugger;
-});
 
+});
 //followersArray
