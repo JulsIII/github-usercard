@@ -3,7 +3,10 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+import axios from "axios";
+console.log(axios);
+const gData = axios.get('https://api.github.com/users/JulsIII');
+console.log(gData);
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -17,6 +20,7 @@
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -50,7 +54,32 @@ const followersArray = [];
       </div>
     </div>
 */
-
+function gitCardMaker(dataObj) {
+  // instantiating the elements
+  const gitCard = document.createElement('div')
+  const gitimage = document.createElement('img')
+  const gitCardInfo = document.createElement('h3')
+  const gitUserName = document.createElement('p')
+  const gitUserLoction = document.createElement('p')
+  const gitProfileLink = document.createElement('p')
+  const gitUserFollowers = document.createElement('p')
+  const gitUserFollowing = document.createElement('p')
+  const gitUserBio = document.createElement('p')
+  // setting class names, attributes and text
+  heading.textContent = `Breed: ${breed}`
+  image.src = imageURL
+  image.classList.add('dog-image')
+  dogCard.classList.add('dog-card')
+  // creating the hierarchy
+  dogCard.appendChild(image)
+  dogCard.appendChild(heading)
+  // adding some interactivity
+  dogCard.addEventListener('click', () => {
+    dogCard.classList.toggle('selected')
+  })
+  // never forget to return!
+  return dogCard
+}
 /*
   List of LS Instructors Github username's:
     tetondan
