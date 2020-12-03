@@ -56,29 +56,42 @@ const followersArray = [];
 */
 function gitCardMaker(dataObj) {
   // instantiating the elements
-  const gitCard = document.createElement('div')
-  const gitimage = document.createElement('img')
-  const gitCardInfo = document.createElement('h3')
-  const gitUserName = document.createElement('p')
-  const gitUserLoction = document.createElement('p')
-  const gitProfileLink = document.createElement('p')
-  const gitUserFollowers = document.createElement('p')
-  const gitUserFollowing = document.createElement('p')
-  const gitUserBio = document.createElement('p')
+  const gitCard = document.createElement('div');
+  const gitImage = document.createElement('img');
+  const gitCardInfo = document.createElement('h3');
+  const gitUserName = document.createElement('p');
+  const gitUserLoction = document.createElement('p');
+  const gitProfileLink = document.createElement('p');
+  const gitUserFollowers = document.createElement('p');
+  const gitUserFollowing = document.createElement('p');
+  const gitUserBio = document.createElement('p');
+  
   // setting class names, attributes and text
-  heading.textContent = `Breed: ${breed}`
-  image.src = imageURL
-  image.classList.add('dog-image')
-  dogCard.classList.add('dog-card')
+  gitCard.classList.add('card') ;
+  gitImage.src = dataObj.avatar_url;
+  gitCardInfo.classList.add('card-info') ;
+  gitUserName.textContent = `User Name: ${dataObj.login}`;
+  gitUserLoction.textContent = `Location: ${dataObj.location}`;
+  gitProfileLink.textContent = `Profile: ${dataObj.html_url}`;
+  gitUserFollowers.textContent = `Followers: ${dataObj.followers}`;
+  gitUserFollowing.textContent = `Following: ${dataObj.following}`;
+  gitUserBio.textContent = `Bio:: ${dataObj.bio}`;
   // creating the hierarchy
-  dogCard.appendChild(image)
-  dogCard.appendChild(heading)
+  gitCard.appendChild(gitImage);
+  gitCard.appendChild(gitCardInfo);
+  gitCard.appendChild(gitUserName);
+  gitCard.appendChild(gitUserLoction);
+  gitCard.appendChild(gitProfileLink);
+  gitCard.appendChild(gitUserFollowers);
+  gitCard.appendChild(gitUserFollowing);
+  gitCard.appendChild(gitUserBio);
   // adding some interactivity
-  dogCard.addEventListener('click', () => {
-    dogCard.classList.toggle('selected')
-  })
+  // gitCard.addEventListener('click', () => {
+  //   gitCard.classList.toggle('selected')
+  // })
+
   // never forget to return!
-  return dogCard
+  return gitCard;
 }
 /*
   List of LS Instructors Github username's:
