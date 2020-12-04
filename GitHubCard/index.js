@@ -4,32 +4,18 @@
     https://api.github.com/users/<your name>
 */
 import axios from "axios";
-//console.log(axios);
+console.log(axios);
 axios
 .get('https://api.github.com/users/JulsIII')
-
-
-
   .then((res) => {
-  
   console.log('data', res.data);
-
   const ftnResult = gitCardMaker(res.data);
-
   console.log('ftn result', ftnResult);
-  // console.log('b4 git card', gitCard);
   gitCards.appendChild(ftnResult);
-  // console.log('afr gitcard', gitCard);
-
    })
-
     .catch((err) => {
     console.log('err1 log', err)
-
 });
-
-//console.log(gData);
-
 
 
 /*
@@ -135,55 +121,24 @@ function gitCardMaker(data) {
   gitCardInfo.appendChild(gitUserBio);
   gitProfileLink.appendChild(gitURLLink);
 
-  //console.log('asdf', gitImage); 
-  // adding some interactivity
-  // gitCard.addEventListener('click', () => {
-  //   gitCard.classList.toggle('selected')
-  // })
-
   // never forget to return!
   return gitCard;
 }
 
-// axios
-// .get('https://api.github.com/users/JulsIII')
-//   .then((res) => {  //whatevr the get gets us is avilble to use here! setups callback for next 'res' ex. 
-//   console.log(res.data); //to check what 'res' looks like. shoudld be an obj, data contains and obj, anotrher propertty called 'message' cosaintg the end array. Array means end.
-//   const resGData = res.data; //end array we found from above being declared
-//      // loop over the array
-//      followersArray.forEach(follower => { //takes callback that had array items
-//       // create card
-//     const newGitUserCard = gitCardMaker(follower) //for each image use dogCardmaker, making cards. Dog Name can be changed!
-//       // console log done
-//     console.log('done') //confirm done making cards
-//       // append
-//     gitCard.appendChild(newGitUserCard); //append the entry point area of website, and add the cards
-//   });
-// })
-// .catch((err) => {
-//   debugger;
-// });
-
- followersArray.forEach(follower => {
-   
+followersArray.forEach(follower => {
 axios
 .get(`https://api.github.com/users/${follower}`)
-  .then((res) => {  //whatevr the get gets us is avilble to use here! setups callback for next 'res' ex. 
-  console.log(res.data); //to check what 'res' looks like. shoudld be an obj, data contains and obj, anotrher propertty called 'message' cosaintg the end array. Array means end.
-  const resGData = res.data; //end array we found from above being declared
-     // loop over the array
-     //takes callback that had array items
+.then((res) => {  
+  console.log(res.data); 
+  const resGData = res.data; 
       // create card
-    const newGitUserCard = gitCardMaker(resGData) //for each image use dogCardmaker, making cards. Dog Name can be changed!
+    const newGitUserCard = gitCardMaker(resGData) 
       // console log done
     console.log('done') //confirm done making cards
       // append
-    gitCards.appendChild(newGitUserCard); //append the entry point area of website, and add the cards
-  
+    gitCards.appendChild(newGitUserCard); //append
   })
   .catch((err) => {
   //debugger;
   });
-
 });
-//followersArray
